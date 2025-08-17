@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Habit Tracker</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <h1><i class="fas fa-chart-line"></i> Habit Tracker</h1>
+                <div class="header-controls">
+                    <button id="dark-mode-toggle" class="btn-icon" title="Toggle Dark Mode">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                    <button id="export-btn" class="btn-icon" title="Export Data">
+                        <i class="fas fa-download"></i>
+                    </button>
+                    <button id="import-btn" class="btn-icon" title="Import Data">
+                        <i class="fas fa-upload"></i>
+                    </button>
+                    <input type="file" id="import-input" accept=".json" style="display: none;">
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Today's Habits Section -->
+            <section class="today-section">
+                <div class="section-header">
+                    <h2><i class="fas fa-calendar-day"></i> Today's Habits</h2>
+                    <span id="current-date" class="date-display"></span>
+                </div>
+                <div id="today-habits" class="habits-list">
+                    <!-- Today's habits will be populated here -->
+                </div>
+                <div id="no-habits-message" class="no-habits" style="display: none;">
+                    <i class="fas fa-seedling"></i>
+                    <p>No habits yet! Add your first habit below to get started.</p>
+                </div>
+            </section>
+
+            <!-- Add Habit Section -->
+            <section class="add-habit-section">
+                <div class="section-header">
+                    <h2><i class="fas fa-plus-circle"></i> Add New Habit</h2>
+                </div>
+                <form id="habit-form" class="habit-form">
+                    <div class="form-group">
+                        <label for="habit-name">Habit Name</label>
+                        <input type="text" id="habit-name" placeholder="e.g., Drink 8 glasses of water" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="habit-frequency">Frequency</label>
+                        <select id="habit-frequency" required>
+                            <option value="daily">Daily</option>
+                            <option value="weekly">Weekly</option>
+                            <option value="custom">Custom</option>
+                        </select>
+                    </div>
+                    <div id="custom-frequency" class="form-group" style="display: none;">
+                        <label for="custom-days">Days per week</label>
+                        <input type="number" id="custom-days" min="1" max="7" value="3">
+                    </div>
+                    <button type="submit" class="btn-primary">
+                        <i class="fas fa-plus"></i> Add Habit
+                    </button>
+                </form>
+            </section>
+
+            <!-- Manage Habits Section -->
+            <section class="manage-habits-section">
+                <div class="section-header">
+                    <h2><i class="fas fa-cog"></i> Manage Habits</h2>
+                </div>
+                <div id="all-habits" class="habits-management">
+                    <!-- All habits will be populated here -->
+                </div>
+            </section>
+
+            <!-- Calendar View Section -->
+            <section class="calendar-section">
+                <div class="section-header">
+                    <h2><i class="fas fa-calendar-alt"></i> Calendar View</h2>
+                    <div class="calendar-controls">
+                        <button id="prev-month" class="btn-icon">
+                            <i class="fas fa-chevron-left"></i>
+                        </button>
+                        <span id="calendar-month-year"></span>
+                        <button id="next-month" class="btn-icon">
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
+                    </div>
+                </div>
+                <div id="calendar-container" class="calendar-container">
+                    <!-- Calendar will be populated here -->
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Edit Habit Modal -->
+    <div id="edit-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Edit Habit</h3>
+                <button id="close-modal" class="btn-icon">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <form id="edit-habit-form" class="habit-form">
+                <div class="form-group">
+                    <label for="edit-habit-name">Habit Name</label>
+                    <input type="text" id="edit-habit-name" required>
+                </div>
+                <div class="form-group">
+                    <label for="edit-habit-frequency">Frequency</label>
+                    <select id="edit-habit-frequency" required>
+                        <option value="daily">Daily</option>
+                        <option value="weekly">Weekly</option>
+                        <option value="custom">Custom</option>
+                    </select>
+                </div>
+                <div id="edit-custom-frequency" class="form-group" style="display: none;">
+                    <label for="edit-custom-days">Days per week</label>
+                    <input type="number" id="edit-custom-days" min="1" max="7" value="3">
+                </div>
+                <div class="modal-actions">
+                    <button type="button" id="cancel-edit" class="btn-secondary">Cancel</button>
+                    <button type="submit" class="btn-primary">Save Changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
